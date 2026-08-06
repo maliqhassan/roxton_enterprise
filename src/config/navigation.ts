@@ -17,7 +17,9 @@ export const primaryNav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Service", href: "/services" },
   { label: "Product", href: "/products" },
-  { label: "Our Team", href: "/team" },
+  // Points at /leadership: that is where the page was built, and /team was
+  // never a route, so this link was reaching not-found.
+  { label: "Our Team", href: "/leadership" },
   { label: "About Us", href: "/about" },
   { label: "Contact Us", href: "/contact" },
 ];
@@ -26,8 +28,22 @@ export const primaryNav: NavItem[] = [
  * Routes whose first section is a full-bleed hero the header floats over, so
  * the header starts transparent with light content there and only takes on a
  * solid background once scrolled. Every other route keeps the solid header.
+ *
+ * A route only belongs here if its hero also pulls itself up under the header
+ * with -mt-[var(--height-header)] and restores the clearance with
+ * --spacing-page-hero-pt. Without that the header turns transparent over the
+ * page background instead of over the hero, and its light nav text lands on
+ * white. Matched exactly, so nested routes keep the solid header until their
+ * own hero exists.
  */
-export const overlayHeaderRoutes: string[] = ["/"];
+export const overlayHeaderRoutes: string[] = [
+  "/",
+  "/services",
+  "/products",
+  "/about",
+  "/contact",
+  "/leadership",
+];
 
 export const footerNavGroups: NavGroup[] = [
   {

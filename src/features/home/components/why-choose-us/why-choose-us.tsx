@@ -29,8 +29,8 @@ export function WhyChooseUsSection() {
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(70%_50%_at_50%_0%,color-mix(in_oklch,var(--primary)_7%,transparent),transparent_70%)]" />
-        <div className="bg-accent/15 absolute -top-24 left-[6%] size-[420px] rounded-full blur-[120px]" />
-        <div className="bg-primary/12 absolute right-[4%] -bottom-28 size-[460px] rounded-full blur-[130px]" />
+        <div className="bg-accent/15 absolute -top-24 left-[6%] size-[420px] rounded-full blur-[80px]" />
+        <div className="bg-primary/12 absolute right-[4%] -bottom-28 size-[460px] rounded-full blur-[90px]" />
         {/* Same 64px lined grid, opacity and origin as the sections above and
             below. Every section's backdrop starts at x=0, so a shared cell size
             keeps the vertical lines continuous across the seam — this section

@@ -19,7 +19,7 @@ export function AnimatedBackground({ className }: AnimatedBackgroundProps) {
       )}
     >
       <div
-        className="animate-drift absolute inset-0 opacity-60"
+        className="absolute inset-0 opacity-60"
         style={{
           backgroundImage:
             "radial-gradient(40% 40% at 20% 20%, color-mix(in oklch, var(--primary) 16%, transparent), transparent), radial-gradient(35% 35% at 85% 30%, color-mix(in oklch, var(--accent) 14%, transparent), transparent)",

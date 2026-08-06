@@ -19,6 +19,14 @@
   --spacing-hero-pt: calc(var(--height-header) + 2rem);
   --spacing-hero-pb: 2rem;
 
+  /* Inner-page heroes (services, products, about, contact). They rise under
+     the transparent header exactly as the home hero does, so their top padding
+     must restore the clearance the negative margin removed — otherwise the
+     eyebrow sits behind the nav. Kept as a token because four heroes share it
+     and a hand-written calc in each would drift. */
+  --spacing-page-hero-pt: calc(var(--height-header) + clamp(3.5rem, 7vw, 6rem));
+  --spacing-page-hero-pb: clamp(3.5rem, 7vw, 6rem);
+
   /* Fixed heights of the two chrome strips. Shared because the hero measures
      itself against them — it subtracts the top bar to fit one screen exactly,
      and offsets up by the header to sit beneath the transparent nav. Changing

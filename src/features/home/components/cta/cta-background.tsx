@@ -1,11 +1,9 @@
 /**
  * Decorative layers inside the CTA panel.
  *
- * A Server Component. The drift comes from the existing --animate-drift token
- * rather than a new keyframe: it already combines a small translate with a
- * slight scale, which is exactly the float-and-pulse the brief asks for, and
- * the global prefers-reduced-motion rule in motion.css already parks it. Only
- * transform is animated, so the glows stay on the compositor.
+ * A Server Component. The glows are static: they previously animated on
+ * --animate-drift, but a 26rem circle under a 90px blur repaints an enormous
+ * filtered surface every frame, which is what made the page scroll badly.
  *
  * The whole layer sits at -z-10 inside the panel's own stacking context: an
  * element's negative-z children paint after its background but before its
@@ -42,10 +40,8 @@ export function CtaBackground() {
         }}
       />
 
-      {/* Drifting glows. Negative delays start them mid-cycle so the two are
-          never in step, which is what stops the pair reading as one pulse. */}
-      <div className="bg-accent/25 animate-drift absolute -top-24 -left-16 size-[26rem] rounded-full blur-[130px] [animation-delay:-6s]" />
-      <div className="animate-drift absolute -right-20 -bottom-28 size-[30rem] rounded-full bg-[#2f6bd8]/25 blur-[150px] [animation-delay:-14s] [animation-duration:32s]" />
+      <div className="bg-accent/25 absolute -top-24 -left-16 size-[26rem] rounded-full blur-[90px]" />
+      <div className="absolute -right-20 -bottom-28 size-[30rem] rounded-full bg-[#2f6bd8]/25 blur-[100px]" />
     </div>
   );
 }

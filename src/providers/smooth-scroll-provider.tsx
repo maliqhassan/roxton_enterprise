@@ -18,11 +18,15 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const lenis = new Lenis({
-      duration: 1.2,
-      // Lenis's own timing-function format (time) => progress — distinct
-      // from the cubic-bezier tokens used elsewhere, kept as-is rather than
-      // forcing a fake unification across incompatible API shapes.
-      easing: (t) => Math.min(1, 1 - Math.pow(2, -10 * t)),
+      // Was duration: 1.2, which meant every wheel tick was smoothed over more
+      // than a second — the page kept gliding long after the input stopped,
+      // which reads as lag rather than smoothness. `lerp` follows the wheel
+      // frame by frame instead of animating to a target, so it stays
+      // responsive; 0.12 keeps the easing without the drift.
+      lerp: 0.12,
+      // Touch devices already have native momentum; smoothing on top of it
+      // fights the platform and feels worse than leaving it alone.
+      syncTouch: false,
     });
 
     let rafId: number;

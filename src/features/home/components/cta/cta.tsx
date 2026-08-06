@@ -8,7 +8,7 @@ import { TrustBadges } from "@/features/home/components/cta/trust-badges";
 /**
  * Final call to action — the last conversion point before the footer.
  *
- * Fully server-rendered. The panel's drift is a CSS animation and the button
+ * Fully server-rendered. The panel's glows are static CSS and the button
  * hovers are CSS states, so the only JavaScript is the shared Reveal leaves
  * that stagger the copy in.
  *
@@ -44,7 +44,7 @@ export function CtaSection() {
       <Container>
         {/* isolate keeps the background layer's -z-10 inside this panel rather
             than letting it fall behind the section, and overflow-hidden clips
-            the drifting glows to the rounded corners. */}
+            the glows to the rounded corners. */}
         <div className="bg-primary relative isolate overflow-hidden rounded-[32px] px-6 py-16 text-center shadow-2xl sm:px-12 sm:py-20 lg:py-24">
           <CtaBackground />
 
