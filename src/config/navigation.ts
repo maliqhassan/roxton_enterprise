@@ -11,12 +11,14 @@ export interface NavGroup {
 // Mirrors the domains approved under src/features/. Routes don't exist under
 // src/app/ yet (aside from the homepage), so these resolve to the shell's
 // not-found page until each domain's pages are built.
+// Order and labels are exactly as specified for the header; the array order is
+// the render order, so this list is the single place either one changes.
 export const primaryNav: NavItem[] = [
   { label: "Home", href: "/" },
+  { label: "Service", href: "/services" },
+  { label: "Product", href: "/products" },
+  { label: "Our Team", href: "/team" },
   { label: "About Us", href: "/about" },
-  { label: "Our Services", href: "/services" },
-  { label: "Products", href: "/products" },
-  { label: "Projects", href: "/projects" },
   { label: "Contact Us", href: "/contact" },
 ];
 
