@@ -1,0 +1,9 @@
+/**
+ * Semantic content max-widths, used instead of ad-hoc max-w-[...] values
+ * inside components.
+ */
+@theme {
+  --container-narrow: 48rem;
+  --container-page: 80rem;
+  --container-wide: 90rem;
+}

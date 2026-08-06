@@ -1,0 +1,94 @@
+/**
+ * Motion tokens. Easing deliberately avoids spring/bounce curves (a known
+ * generic-AI-design tell) in favor of restrained cubic-bezier eases.
+ * Durations are plain vars (no Tailwind duration-* theme namespace exists);
+ * consume via arbitrary value syntax, e.g. duration-[var(--duration-base)].
+ * Numeric mirror for Framer Motion / GSAP lives in src/animations/tokens.ts
+ * and must stay in sync with the values below.
+ */
+@theme {
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-fade-in: fade-in var(--duration-base) var(--ease-standard);
+  --animate-fade-in-up: fade-in-up var(--duration-moderate) var(--ease-emphasized);
+  --animate-scale-in: scale-in var(--duration-base) var(--ease-standard);
+  /* Ambient/decorative loop — deliberately outside the interaction duration
+     scale above, which is tuned for UI transitions, not slow background motion. */
+  --animate-drift: drift 24s ease-in-out infinite;
+  /* Continuous logo transport, same rationale as --animate-drift. The track
+     renders its content twice, so translating exactly -50% lands on a
+     visually identical frame and the loop has no seam. Linear because any
+     easing would make a continuous scroll visibly pulse. */
+  --animate-marquee: marquee 30s linear infinite;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @keyframes drift {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(2%, -3%, 0) scale(1.05);
+    }
+  }
+}
+
+:root {
+  --duration-instant: 100ms;
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-moderate: 400ms;
+  --duration-slow: 600ms;
+  --duration-slower: 900ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

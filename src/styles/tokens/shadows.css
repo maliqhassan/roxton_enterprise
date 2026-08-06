@@ -1,0 +1,23 @@
+/**
+ * Elevation scale tinted with Primary instead of flat black, for the soft,
+ * layered shadow look used by premium brand references (Stripe/Linear)
+ * rather than Tailwind's default gray shadows.
+ */
+@theme {
+  --shadow-xs: 0 1px 2px color-mix(in oklch, var(--primary) 6%, transparent);
+  --shadow-sm:
+    0 1px 3px color-mix(in oklch, var(--primary) 8%, transparent),
+    0 1px 2px color-mix(in oklch, var(--primary) 6%, transparent);
+  --shadow-md:
+    0 4px 8px color-mix(in oklch, var(--primary) 10%, transparent),
+    0 2px 4px color-mix(in oklch, var(--primary) 6%, transparent);
+  --shadow-lg:
+    0 12px 24px color-mix(in oklch, var(--primary) 12%, transparent),
+    0 4px 8px color-mix(in oklch, var(--primary) 6%, transparent);
+  --shadow-xl:
+    0 24px 48px color-mix(in oklch, var(--primary) 14%, transparent),
+    0 8px 16px color-mix(in oklch, var(--primary) 8%, transparent);
+  --shadow-2xl:
+    0 32px 64px color-mix(in oklch, var(--primary) 18%, transparent),
+    0 12px 24px color-mix(in oklch, var(--primary) 10%, transparent);
+}

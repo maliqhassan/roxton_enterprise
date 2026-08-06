@@ -1,0 +1,102 @@
+/**
+ * Pure-CSS hover interactions — no JS, no component wrapper needed. The
+ * global prefers-reduced-motion override in motion.css already collapses
+ * these transitions to near-zero duration, so no special-casing here.
+ */
+/**
+ * Origin fill: a circle expands from wherever the cursor entered, flooding the
+ * button, and retracts toward wherever it left.
+ *
+ * The entry/exit point arrives as --origin-x/--origin-y from the single
+ * delegated listener in <OriginFill />. Without JS the circle simply grows
+ * from the centre, so the hover still works — it just loses the directional
+ * cue.
+ *
+ * The circle is a ::before at z-index -1, which is the one layer that sits
+ * *above* the button's own background but *below* its label: per CSS painting
+ * order, negative-z descendants paint after the element's background and
+ * before its inline content. So the fill never covers the text, and no wrapper
+ * element or blend mode is needed to protect it.
+ *
+ * 300% width guarantees the circle's radius exceeds the button's diagonal from
+ * any corner, so the flood always completes rather than leaving a lens shape.
+ *
+ * Duration is deliberately --duration-base, not the slower spring the effect
+ * is often given: the label's colour inverts on the button's own transition,
+ * and a slow fill would leave inverted text sitting on the un-filled
+ * background for long enough to read as a contrast failure.
+ */
+@utility origin-fill {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: var(--origin-y, 50%);
+    left: var(--origin-x, 50%);
+    width: 300%;
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    border-radius: 50%;
+    background-color: var(--fill-color, var(--primary));
+    scale: 0;
+    pointer-events: none;
+    transition: scale var(--duration-base) var(--ease-emphasized);
+  }
+
+  &:hover::before {
+    scale: 1;
+  }
+}
+
+@utility hover-lift {
+  transition:
+    transform var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-standard);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+@utility card-hover {
+  transition:
+    transform var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: color-mix(in oklch, var(--primary) 30%, var(--border));
+  }
+}
+
+@utility button-hover {
+  transition: transform var(--duration-fast) var(--ease-standard);
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@utility glass-hover {
+  transition:
+    background-color var(--duration-base) var(--ease-standard),
+    backdrop-filter var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard);
+
+  &:hover {
+    background-color: color-mix(in oklch, var(--background) 60%, transparent);
+    backdrop-filter: blur(12px);
+    border-color: color-mix(in oklch, var(--foreground) 10%, transparent);
+  }
+}

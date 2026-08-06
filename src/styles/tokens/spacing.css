@@ -1,0 +1,28 @@
+/**
+ * Base spacing unit made explicit (matches Tailwind's default, declared
+ * intentionally) plus semantic layout-rhythm tokens so section/page padding
+ * is never a one-off guess inside a component.
+ */
+@theme {
+  --spacing: 0.25rem;
+}
+
+:root {
+  --spacing-gutter: clamp(1.25rem, 4vw, 4rem);
+  --spacing-section-y: clamp(3rem, 6vw, 8rem);
+
+  /* The hero is viewport-locked and vertically centred, so its padding only
+     has to clear the overlaid header and keep content off the edges. Large
+     fluid padding fights the fixed height — it pushed content past the fold
+     rather than adding breathing room. The top/bottom asymmetry is exactly
+     the header's height, which optically re-centres content below it. */
+  --spacing-hero-pt: calc(var(--height-header) + 2rem);
+  --spacing-hero-pb: 2rem;
+
+  /* Fixed heights of the two chrome strips. Shared because the hero measures
+     itself against them — it subtracts the top bar to fit one screen exactly,
+     and offsets up by the header to sit beneath the transparent nav. Changing
+     a strip's height here keeps the hero in sync automatically. */
+  --height-topbar: 2.25rem;
+  --height-header: 5rem;
+}

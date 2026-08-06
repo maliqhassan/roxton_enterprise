@@ -1,0 +1,66 @@
+/**
+ * Semantic type scale. Large sizes (display, h1-h3) use clamp() for fluid
+ * mobile -> desktop scaling with tightened tracking; smaller sizes stay
+ * fixed for reading stability. Font-family assignment (--font-sans /
+ * --font-heading) lives in globals.css, where shadcn already owns those
+ * token names.
+ */
+@theme {
+  /* Blockbuster marketing headline — distinct from --text-display (used for
+     stat counters etc.) so tuning one never ripples into the other. The upper
+     bound is also capped against viewport HEIGHT: this headline sets three
+     lines inside a hero locked to one screen, so on short viewports (laptops,
+     landscape phones) a width-only clamp overflows the fold. At 900px+ tall
+     the 6rem ceiling wins and nothing changes. */
+  --text-hero: clamp(4rem, 2rem + 7vw, min(6rem, 11vh));
+  --text-hero--line-height: 0.95;
+  --text-hero--letter-spacing: -0.02em;
+  --text-hero--font-weight: 900;
+
+  /* Section-opening statement headline — sits between --text-h1 and
+     --text-display. Marketing sections lead with a claim rather than a
+     document heading, so this runs heavier and tighter than h1 while staying
+     below the hero. Reaches its 60px ceiling at the 80rem container width. */
+  --text-section: clamp(2.625rem, 1.5rem + 2.8vw, 3.75rem);
+  --text-section--line-height: 1.05;
+  --text-section--letter-spacing: -0.02em;
+  --text-section--font-weight: 800;
+
+  --text-display: clamp(2.5rem, 1.8rem + 3vw, 4.5rem);
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.02em;
+
+  --text-h1: clamp(2.25rem, 1.8rem + 1.8vw, 3.5rem);
+  --text-h1--line-height: 1.1;
+  --text-h1--letter-spacing: -0.02em;
+
+  --text-h2: clamp(1.875rem, 1.6rem + 1.1vw, 2.75rem);
+  --text-h2--line-height: 1.15;
+  --text-h2--letter-spacing: -0.01em;
+
+  --text-h3: clamp(1.5rem, 1.35rem + 0.6vw, 2rem);
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -0.01em;
+
+  --text-h4: 1.5rem;
+  --text-h4--line-height: 1.3;
+
+  --text-h5: 1.25rem;
+  --text-h5--line-height: 1.4;
+
+  --text-h6: 1.125rem;
+  --text-h6--line-height: 1.4;
+
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.6;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.5;
+
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.4;
+  --text-caption--letter-spacing: 0.01em;
+}

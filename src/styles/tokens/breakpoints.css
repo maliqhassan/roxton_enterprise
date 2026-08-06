@@ -1,0 +1,13 @@
+/**
+ * Explicit breakpoint scale. Values sm–2xl match Tailwind's own defaults,
+ * declared here intentionally rather than left implicit. 3xl is a deliberate
+ * addition for large-desktop art direction.
+ */
+@theme {
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+  --breakpoint-3xl: 120rem;
+}

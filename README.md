@@ -1,34 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Roxton Enterprises (Pvt) Ltd. — Corporate Website
+
+Production-ready corporate website for Roxton Enterprises, a procurement, logistics, supply chain, and engineering company.
+
+## Tech Stack
+
+- [Next.js 15](https://nextjs.org) (App Router) + React 19 + TypeScript
+- [Tailwind CSS 4](https://tailwindcss.com) (CSS-first config, no `tailwind.config.ts`)
+- [shadcn/ui](https://ui.shadcn.com) (Base UI primitives, Lucide icons)
+- [Framer Motion](https://motion.dev) for UI animation, [GSAP](https://gsap.com) for advanced/scroll-driven sequences
+- [Lenis](https://lenis.darkroom.engineering) for smooth scroll
+- [React Hook Form](https://react-hook-form.com) + [Zod](https://zod.dev) for forms and validation
+- [Embla Carousel](https://www.embla-carousel.com) for carousels/sliders
+- ESLint + Prettier (with `prettier-plugin-tailwindcss`)
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-## Learn More
+| Script                 | Purpose                          |
+| ---------------------- | -------------------------------- |
+| `npm run dev`          | Start dev server (Turbopack)     |
+| `npm run build`        | Production build                 |
+| `npm run start`        | Start production server          |
+| `npm run lint`         | Lint the codebase                |
+| `npm run lint:fix`     | Lint and auto-fix                |
+| `npm run format`       | Format with Prettier             |
+| `npm run format:check` | Check formatting without writing |
+| `npm run typecheck`    | Type-check without emitting      |
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Feature-based architecture — routing lives in `app/`, shared building blocks live in top-level folders, and self-contained feature modules live in `features/`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/                 # App Router routes, layouts (composition only — no business logic)
+├── components/
+│   ├── ui/               # shadcn/ui primitives (managed via `npx shadcn add`)
+│   ├── layout/            # Header, Footer, and other structural shell components
+│   └── shared/             # Reusable presentational components shared across features
+├── features/             # Self-contained feature modules (components/hooks/utils/types per feature)
+├── lib/                   # Framework-agnostic utilities, third-party client setup
+│   └── validations/        # Shared Zod schemas
+├── hooks/                 # Shared/global React hooks
+├── types/                 # Shared global TypeScript types
+├── config/                # Site-wide configuration (site.ts, nav, etc.)
+├── constants/              # App-wide constants
+└── providers/               # React context providers (theme, smooth scroll, etc.)
 
-## Deploy on Vercel
+public/
+├── fonts/
+├── images/
+└── icons/
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Path aliases
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`@/*` maps to `src/*`, with scoped aliases (`@/components/*`, `@/features/*`, `@/lib/*`, `@/hooks/*`, `@/types/*`, `@/config/*`, `@/constants/*`, `@/providers/*`) defined in [tsconfig.json](tsconfig.json).
+
+## Status
+
+Architecture-only bootstrap. No pages/sections have been built yet.

@@ -1,0 +1,14 @@
+/**
+ * Named layering scale, consumed via arbitrary-value syntax
+ * (e.g. z-[var(--z-modal)]) since z-index has no Tailwind theme namespace.
+ */
+:root {
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-overlay: 30;
+  --z-modal: 40;
+  --z-popover: 50;
+  --z-toast: 60;
+  --z-tooltip: 70;
+}
